@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高冷校花 - 第二章：同桌的你</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #1e3c72 100%);
+            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+        }
+
+        .header {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="50" cy="50" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+            position: relative;
+            z-index: 1;
+        }
+
+        .navigation {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            text-align: center;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+        }
+
+        .nav-button {
+            display: inline-block;
+            margin: 0 10px;
+            padding: 10px 20px;
+            background: rgba(102, 126, 234, 0.2);
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .nav-button:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .content {
+            padding: 40px 50px;
+            color: #333;
+        }
+
+        .chapter-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 30px;
+            text-align: center;
+            font-weight: bold;
+            position: relative;
+        }
+
+        .chapter-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        .story-text {
+            font-size: 1.1em;
+            line-height: 2;
+            text-align: justify;
+            color: #444;
+            margin-bottom: 20px;
+            text-indent: 2em;
+        }
+
+        .story-text:first-of-type {
+            margin-top: 20px;
+        }
+
+        .highlight {
+            background: linear-gradient(120deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 500;
+        }
+
+        .scene-break {
+            text-align: center;
+            margin: 30px 0;
+            color: #667eea;
+            font-size: 1.5em;
+        }
+
+        .footer {
+            background: rgba(102, 126, 234, 0.1);
+            padding: 20px;
+            text-align: center;
+            color: #667eea;
+            font-style: italic;
+        }
+
+        .auto-jump {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(102, 126, 234, 0.9);
+            color: white;
+            padding: 15px 25px;
+            border-radius: 25px;
+            font-size: 1em;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1000;
+            animation: slideInRight 0.5s ease-out;
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .countdown {
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+            
+            .container {
+                margin: 10px;
+                border-radius: 15px;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 30px 25px;
+            }
+            
+            .story-text {
+                font-size: 1em;
+            }
+            
+            .navigation {
+                padding: 15px 10px;
+            }
+            
+            .nav-button {
+                margin: 5px;
+                padding: 8px 15px;
+                font-size: 0.9em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>高冷校花</h1>
+            <p>青春校园 · 心动邂逅</p>
+        </div>
+        
+        <div class="navigation">
+            <a href="index.html" class="nav-button">🏠 主页</a>
+            <a href="高冷校花_第一章.html" class="nav-button">第一章</a>
+            <a href="高冷校花_第二章.html" class="nav-button">第二章</a>
+        </div>
+        
+        <div class="content">
+            <h2 class="chapter-title">第二章：同桌的你</h2>
+            
+            <p class="story-text">清晨六点半，南城一中的校园还笼罩在薄雾中。<span class="highlight">林小满</span>照例是第一个到教室的学生，她习惯性地坐在靠窗的第三排，从书包里拿出英文单词本，开始了一天的晨读。</p>
+
+            <p class="story-text">"同学们，今天我们调整座位。"班主任李老师走进教室，手里拿着一张座位表，"根据入学成绩和身高，重新分配同桌。"</p>
+
+            <p class="story-text">教室里立刻响起一阵窃窃私语。林小满头也不抬，继续翻着单词本。对她来说，坐哪里都一样，反正她也不打算和任何人交流。</p>
+
+            <p class="story-text">"<span class="highlight">林小满，沈放</span>，你们两个坐第三组最后一排。"</p>
+
+            <p class="story-text">林小满的手指在单词本上顿了一下。沈放？昨天那个在操场上遇到的男生？她抬起头，正好对上沈放看过来的目光。他嘴角挂着若有若无的笑意，似乎对这个安排很满意。</p>
+
+            <div class="scene-break">❄️ ❄️ ❄️</div>
+
+            <p class="story-text">"报告老师，我可以一个人坐。"林小满站起来，声音清冷。</p>
+
+            <p class="story-text">李老师皱了皱眉："这是学校的规定，每个同学都要有同桌。"</p>
+
+            <p class="story-text">"我可以申请特例。"林小满坚持道。</p>
+
+            <p class="story-text">"不行。"李老师直接拒绝，"沈放虽然平时调皮，但成绩很好，你们可以互相帮助。"</p>
+
+            <p class="story-text">沈放已经拎着书包走了过来，在经过林小满身边时轻声说："放心，我不会打扰你学习的。"</p>
+
+            <p class="story-text">林小满没说话，只是默默地把书本往自己这边挪了挪，在两人之间划出一条明显的分界线。</p>
+
+            <div class="scene-break">📚 📚 📚</div>
+
+            <p class="story-text">第一节是数学课。林小满坐得笔直，认真记着笔记。沈放却趴在桌子上，看起来像是在睡觉。但当老师提问时，他总能准确地说出答案。</p>
+
+            <p class="story-text">"沈放，你来解这道题。"数学老师指着黑板。</p>
+
+            <p class="story-text">沈放懒洋洋地站起来，走到黑板前，唰唰几笔就写出了完整的解题过程，字迹潇洒飘逸。</p>
+
+            <p class="story-text">"完全正确。"数学老师满意地点头，"林小满，你看看他的解题思路，比你用的方法简洁多了。"</p>
+
+            <p class="story-text">林小满瞥了一眼黑板，不得不承认沈放的方法确实更高效。她第一次对这位同桌产生了一丝好奇。</p>
+
+            <div class="scene-break">🍱 🍱 🍱</div>
+
+            <p class="story-text">中午，林小满照例独自去食堂。打好饭后，她习惯性地寻找空位，却发现沈放已经坐在了一个靠窗的位置，对面还放着一个餐盘。</p>
+
+            <p class="story-text">"这边。"沈放朝她招了招手。</p>
+
+            <p class="story-text">林小满犹豫了一下，还是走了过去："你怎么知道我会坐这里？"</p>
+
+            <p class="story-text">"观察。"沈放笑了笑，"你连续三天都坐这个位置，而且总是在12点15分左右到。"</p>
+
+            <p class="story-text">林小满没说话，开始安静地吃饭。沈放也不打扰她，只是偶尔抬头看她一眼。</p>
+
+            <p class="story-text">"你为什么总是独来独往？"吃到一半，沈放突然问道。</p>
+
+            <p class="story-text">林小满的手顿了一下："习惯了。"</p>
+
+            <p class="story-text">"因为那些谣言？"沈放直视着她的眼睛，"说你高傲、不合群、看不起人？"</p>
+
+            <p class="story-text">林小满放下筷子："你知道些什么？"</p>
+
+            <p class="story-text">"我知道那些都是假的。"沈放的声音突然变得认真，"真正的你，比她们说的复杂得多。"</p>
+
+            <p class="story-text">林小满第一次认真地打量这个同桌。阳光下，他的睫毛在脸上投下细碎的阴影，眼神清澈得让人心慌。</p>
+
+            <div class="scene-break">🏐 🏐 🏐</div>
+
+            <p class="story-text">下午是体育课。男生打篮球，女生打排球。林小满因为身高被选进了排球队，正好和沈放的篮球场相邻。</p>
+
+            <p class="story-text">"喂，沈放，你同桌在看我们打球呢！"有男生起哄。</p>
+
+            <p class="story-text">沈放转头，果然看到林小满的目光正看向这边。四目相对，林小满慌忙移开视线，却不小心把排球打飞了。</p>
+
+            <p class="story-text">排球直直地飞向篮球场，眼看就要砸到沈放。沈放一个漂亮的转身，单手接住了排球，然后朝林小满挑了挑眉。</p>
+
+            <p class="story-text">"技术不错。"他喊道。</p>
+
+            <p class="story-text">林小满的脸罕见地红了。她低下头，假装专注地整理鞋带。</p>
+
+            <div class="scene-break">🌧️ 🌧️ 🌧️</div>
+
+            <p class="story-text">放学时，下起了小雨。林小满没带伞，站在教学楼门口发愁。沈放撑着一把黑色的大伞走了过来："一起？"</p>
+
+            <p class="story-text">"不用，我等雨停。"</p>
+
+            <p class="story-text">"天气预报说会下到晚上。"沈放已经走到了雨幕中，回头看她，"放心，伞很大，不会碰到你的。"</p>
+
+            <p class="story-text">林小满犹豫了几秒，还是走了过去。两人保持着适当的距离，在伞下沉默地走着。雨滴打在伞面上的声音，像是某种无声的对话。</p>
+
+            <p class="story-text">"你家住哪里？"走到校门口时，沈放问道。</p>
+
+            <p class="story-text">"梧桐路。"</p>
+
+            <p class="story-text">"正好顺路。"沈放调整了伞的角度，"走吧。"</p>
+
+            <p class="story-text">一路上，两人都没怎么说话。但林小满发现，沈放总是把伞往她这边倾斜，自己的左肩却被雨水打湿了。</p>
+
+            <p class="story-text">"到了。"林小满停在一栋老式公寓楼前。</p>
+
+            <p class="story-text">"明天见。"沈放说。</p>
+
+            <p class="story-text">"等等。"林小满叫住他，"伞..."</p>
+
+            <p class="story-text">"明天还我就行。"沈放已经转身走进了雨中。</p>
+
+            <div class="scene-break">📖 📖 📖</div>
+
+            <p class="story-text">晚上，林小满翻开日记本，写下：</p>
+
+            <p class="story-text">"9月3日，小雨。有了新的同桌。他...和想象中不一样。"</p>
+
+            <p class="story-text">写完，她看着窗外还在下的雨，第一次觉得雨天也没有那么讨厌。</p>
+
+            <div class="scene-break">🌅 🌅 🌅</div>
+
+            <p class="story-text">第二天早晨，林小满比平时早到了十分钟。她把自己的课桌往中间挪了一点，那条分界线变得不那么明显了。</p>
+
+            <p class="story-text">沈放走进教室时，看到这个小动作，嘴角微微上扬。他什么也没说，只是把自己这边也往中间挪了挪。</p>
+
+            <p class="story-text">两条课桌之间的空隙，就这样悄悄地缩小了。</p>
+        </div>
+        
+        <div class="footer">
+            <p>有时候，最美好的开始，往往藏在最平凡的日常里...</p>
+            <p>
+                <a href="高冷校花_第一章.html" style="color: #ff6b6b; text-decoration: none; margin: 0 10px;">← 第一章</a>
+                <a href="index.html" style="color: #ff6b6b; text-decoration: none; margin: 0 10px;">🏠 主页</a>
+                <a href="高冷校花_第三章.html" style="color: #ff6b6b; text-decoration: none; margin: 0 10px;">第三章 →</a>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // 添加阅读进度功能
+        let readingProgress = 0;
+        const storyText = document.querySelectorAll('.story-text');
+        
+        function updateReadingProgress() {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+            readingProgress = (scrollTop / scrollHeight) * 100;
+            
+            // 可以在这里添加进度条显示
+            console.log(`阅读进度: ${Math.round(readingProgress)}%`);
+        }
+
+        window.addEventListener('scroll', updateReadingProgress);
+
+        // 添加滚动动画
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // 为每个段落添加动画
+        storyText.forEach((el, index) => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+            observer.observe(el);
+        });
+
+        // 添加键盘导航
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') {
+                window.location.href = '高冷校花_第一章.html';
+            } else if (e.key === 'ArrowRight') {
+                window.location.href = '高冷校花_第三章.html';
+            }
+        });
+
+        // 添加双击返回顶部
+        document.addEventListener('dblclick', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // 添加自动跳转功能
+        let autoJumpTimer = null;
+        let countdownTimer = null;
+        let countdown = 10;
+        let isCountdownActive = false;
+
+        function startAutoJump() {
+            // 等待5秒后开始倒计时
+            autoJumpTimer = setTimeout(() => {
+                showCountdown();
+            }, 5000);
+        }
+
+        function showCountdown() {
+            isCountdownActive = true;
+            
+            // 创建倒计时提示
+            const countdownDiv = document.createElement('div');
+            countdownDiv.id = 'countdownDiv';
+            countdownDiv.innerHTML = `
+                <div style="position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); 
+                           background: rgba(255, 255, 255, 0.95); padding: 30px; border-radius: 15px; 
+                           box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); text-align: center; z-index: 1000;
+                           backdrop-filter: blur(10px);">
+                    <h3 style="color: #ff6b6b; margin-bottom: 15px;">📖 第二章结束 📖</h3>
+                    <p style="color: #666; margin-bottom: 20px;">即将自动跳转至第三章...</p>
+                    <div style="font-size: 24px; color: #ff6b6b; margin-bottom: 15px;">
+                        <span id="countdownNumber">10</span> 秒
+                    </div>
+                    <button onclick="cancelAutoJump()" style="background: #ff6b6b; color: white; 
+                                                            border: none; padding: 10px 20px; 
+                                                            border-radius: 20px; cursor: pointer;">
+                        取消跳转
+                    </button>
+                </div>
+            `;
+            document.body.appendChild(countdownDiv);
+
+            // 开始倒计时
+            countdownTimer = setInterval(() => {
+                countdown--;
+                const numberSpan = document.getElementById('countdownNumber');
+                if (numberSpan) {
+                    numberSpan.textContent = countdown;
+                }
+                
+                if (countdown <= 0) {
+                    clearInterval(countdownTimer);
+                    window.location.href = '高冷校花_第三章.html';
+                }
+            }, 1000);
+        }
+
+        function cancelAutoJump() {
+            if (autoJumpTimer) clearTimeout(autoJumpTimer);
+            if (countdownTimer) clearInterval(countdownTimer);
+            isCountdownActive = false;
+            
+            const countdownDiv = document.getElementById('countdownDiv');
+            if (countdownDiv) {
+                countdownDiv.remove();
+            }
+        }
+
+        // 页面加载完成后启动自动跳转
+        window.addEventListener('load', startAutoJump);
+    </script>
+</body>
+</html>
